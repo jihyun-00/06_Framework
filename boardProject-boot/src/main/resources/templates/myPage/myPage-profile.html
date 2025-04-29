@@ -37,7 +37,7 @@
 
             <img th:with="user=#{user.default.image}"
                 th:src="${session.loginMember.profileImg ?: user}"
-                id="profileImg" >
+                id="profileImg" > <!-- 미리보기 -->
               
           </div>
           <span id="deleteImage">x</span>
