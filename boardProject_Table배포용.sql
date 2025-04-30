@@ -203,6 +203,10 @@ SELECT COUNT(*) FROM "BOARD_LIKE"
 WHERE BOARD_NO = 2000
 AND MEMBER_NO = 1;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3fb00d4 (게시글 작성까지 완료)
 -- 게시판 이미지 테이블
 CREATE TABLE "BOARD_IMG" (
 	"IMG_NO"	NUMBER		NOT NULL,
@@ -537,6 +541,37 @@ SELECT MEMBER_EMAIL
 	FROM "MEMBER"
 	WHERE MEMBER_NICKNAME = '수지'
 	AND MEMBER_TEL = '01025943447';
+
+INSERT INTO "BOARD_IMG"
+(
+	SELECT NEXT_IMG_NO(), '경로1', '원본1', '변경1', 1, 1999 FROM DUAL
+	UNION
+	SELECT NEXT_IMG_NO(), '경로2', '원본2', '변경2', 2, 1999 FROM DUAL
+	UNION
+	SELECT NEXT_IMG_NO(), '경로3', '원본3', '변경3', 3, 1999 FROM DUAL
+);
+
+ROLLBACK;
+
+-- SEQ_IMG_NO 시퀀스의 다음값을 반환하는 함수 생성
+CREATE OR REPLACE FUNCTION NEXT_IMG_NO
+
+-- 반환형
+RETURN NUMBER
+
+-- 사용할 변수
+IS IMG_NO NUMBER;
+
+BEGIN 
+	SELECT SEQ_IMG_NO.NEXTVAL
+	INTO IMG_NO
+	FROM DUAL;
+
+	RETURN IMG_NO;
+	
+END; -- 4/30 15:33 설명
+
+
 
  -------------------------------------------------------------------------
 
