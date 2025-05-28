@@ -40,5 +40,4 @@ public class FilterConfig {
 		
 		return filter; // 반환된 객체가 필터를 생성해서 Bean으로 등록
 	}
-
 }

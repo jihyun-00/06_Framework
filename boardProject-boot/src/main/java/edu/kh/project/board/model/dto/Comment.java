@@ -23,5 +23,4 @@ public class Comment {
 	private String memberNickname;
 	private String profileImg;
 	
-
 }

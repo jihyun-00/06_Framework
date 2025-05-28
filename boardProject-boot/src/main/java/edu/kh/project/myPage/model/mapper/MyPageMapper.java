@@ -52,5 +52,4 @@ public interface MyPageMapper {
 	 * @return
 	 */
 	int profile(Member member);
-
 }

@@ -64,5 +64,4 @@ public interface MyPageService {
 	 * @return
 	 */
 	int profile(MultipartFile profileImg, Member loginMember) throws Exception;
-
 }

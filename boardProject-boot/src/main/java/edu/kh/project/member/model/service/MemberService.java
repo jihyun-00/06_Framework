@@ -28,5 +28,11 @@ public interface MemberService{
 	 * @return
 	 */
 	int signup(Member inputMember, String[] memberAddress);
+	/** 아이디 찾기 서비스
+	 * @param memberNickname
+	 * @param memberTel
+	 * @return
+	 */
+	String findId(String memberNickname, String memberTel);
 
 }

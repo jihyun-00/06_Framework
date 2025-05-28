@@ -8,8 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -146,4 +149,19 @@ public class BoardController {
 		return path;
 	}
 	
+<<<<<<< HEAD
 }
+=======
+	// 비동기 요청이므로 int
+	/** 게시글 좋아요 체크/해제
+	 * @param map
+	 * @return
+	 */
+	@ResponseBody // 비동기
+	@PostMapping("like") // /board/like (POST)		// js에서 넘어오는 3개값이 모두 int형이므로 Integer
+	public int boardLike(@RequestBody Map<String, Integer> map) {
+		return service.boardLike(map);
+	}
+	
+}
+>>>>>>> a33cd5c (좋아요 수까지 완료)

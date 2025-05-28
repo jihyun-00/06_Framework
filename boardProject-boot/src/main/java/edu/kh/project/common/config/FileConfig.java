@@ -49,10 +49,10 @@ public class FileConfig implements WebMvcConfigurer{
 	// --------------------------------------------------------
 	
 	// 게시판 이미지 관련 경로
-	@Value("${my.board.resources-handler}")
+	@Value("${my.board.resource-handler}")
 	private String boardResourceHandler; // /images/board/**
 	
-	@Value("${my.board.resources-location}")
+	@Value("${my.board.resource-location}")
 	private String boardResourceLocation; // file:///C:/uploadFiles/board/
 	
 	// 요청 주소에 따라
@@ -123,4 +123,8 @@ public class FileConfig implements WebMvcConfigurer{
 	
 	
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> a33cd5c (좋아요 수까지 완료)

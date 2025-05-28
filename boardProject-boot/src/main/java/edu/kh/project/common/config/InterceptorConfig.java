@@ -29,5 +29,4 @@ public class InterceptorConfig implements WebMvcConfigurer{
 		.excludePathPatterns("/css/**", "/js/**", "images/**", "favicon.ico"); // 가로채지 않을 주소 지정
 	}
 
-	
 }

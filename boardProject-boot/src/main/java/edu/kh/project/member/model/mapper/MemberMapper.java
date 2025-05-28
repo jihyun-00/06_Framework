@@ -33,5 +33,12 @@ public interface MemberMapper {
 	 * @return
 	 */
 	int signup(Member inputMember);
+
+	/** 아이디 찾기
+	 * @param memberNickname
+	 * @param memberTel
+	 * @return
+	 */
+	String findId(String memberNickname, String memberTel);
 	
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -187,11 +188,57 @@ public class MemberController {
 	// 아이디 찾기
 	// -> 닉네임, 전화번호
 	// -> 이메일 알려줌
+	/** 아이디 비번 찾기 페이지로 이동
+	 * @return
+	 */
+	@GetMapping("findId")
+	public String findPage() {
+		return "member/findId";
+	}
+	
+	
+	@PostMapping("findId")
+	public String findId(@RequestParam("memberNickname") String memberNickname,
+						@RequestParam("memberTel") String memberTel,
+						RedirectAttributes ra) {
+		
+		// 현재 로그인한 회원의 주소를 꺼내옴
+		// 현재 로그인한 회원 정보 -> session에 등록된 상태(loginMember)
+		
+		String memberEmail = service.findId(memberNickname, memberTel);
+		
+		if(memberEmail != null) {
+			ra.addFlashAttribute("memberEmail", memberEmail);
+			
+		} else {
+			ra.addFlashAttribute("message", "일치하는 회원이 없습니다.");
+		}
+		
+		return "redirect:findId";
+	}
 	
 	// 비밀번호 찾기
 	// -> 닉네임, 이메일, 전화번호
 	// DB 존재한다!
 	// 새로운 비밀번호 발급 후 비밀번호 변경
 	// 새로운 비밀번호 암호화 후 업데이트
+	@GetMapping("findPw")
+	public String findPwPage() {
+		return "member/findPw";
+	}
+	
+	@PostMapping("findPw")
+	public String findPw(@RequestParam("memberNickname") String memberNickname,
+						@RequestParam("memberTel") String memberTel,
+						@RequestParam("memberEmail") String memberEmail,
+						RedirectAttributes ra) {
+		
+		// 현재 로그인한 회원의 주소를 꺼내옴
+		// 현재 로그인한 회원 정보 -> session에 등록된 상태(loginMember)
+		
+//		int result = service.findPw(memberNickname, memberTel, memberEmail);
+		
+		return "redirect:/findPw";
+	}
 	
 }

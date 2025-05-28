@@ -21,5 +21,4 @@ public class BoardImg {
 	
 	// 게시글 이미지 삽입/수정할 때 사용
 	private MultipartFile uploadFile;
-
 }

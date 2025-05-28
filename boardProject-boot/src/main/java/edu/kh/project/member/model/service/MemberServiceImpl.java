@@ -112,6 +112,12 @@ public class MemberServiceImpl implements MemberService{
 		// 회원 가입 매퍼 메서드 호출
 		return mapper.signup(inputMember);
 	}
+
+	// 아이디 찾기 서비스
+	@Override
+	public String findId(String memberNickname, String memberTel) {
+		return mapper.findId(memberNickname, memberTel);
+	}
 	
 	
 }
