@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>오류 페이지</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Pretendard', sans-serif;
+      background-color: #fffdf5;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .background-text {
+      position: absolute;
+      font-size: 20rem;
+      font-weight: 900;
+      color: #ffec99;
+      opacity: 0.5;
+      z-index: 0;
+      user-select: none;
+    }
+
+    .content {
+      z-index: 1;
+      text-align: center;
+    }
+
+    .content img {
+      width: 180px;
+      margin-bottom: 20px;
+    }
+
+    .content h1 {
+      font-size: 2rem;
+      margin: 0;
+      color: #ffca28;
+    }
+
+    .content p {
+      font-size: 1.1rem;
+      margin-top: 10px;
+    }
+
+    .content a {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      background-color: #ffca28;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="background-text">500</div> <!-- 또는 404 -->
+  <div class="content">
+    <img src="/static/img/lemon_error.png" alt="레몬 캐릭터">
+    <h1>서버에 문제가 생겼어요 🍋</h1> <!-- 404면 다른 문구로 -->
+    <p>요청을 처리하는 도중 오류가 발생했습니다.</p>
+    <a href="/">홈으로 돌아가기</a>
+  </div>
+</body>
+</html>

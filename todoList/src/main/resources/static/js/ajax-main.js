@@ -156,6 +156,77 @@ addBtn.addEventListener("click", () => {
 
 });
 
+// 비동기 할 일 전체 목록을 조회하는 함수 
+const selectTodoList = () => {
+
+  fetch("/ajax/selectList")
+  .then(resp => resp.json()) // 응답결과를 json으로 받음
+  .then(todoList => {
+      // 매개변수 todoList:
+      // 첫번째 then에서 resp.text() / resp.json() 했냐에 따라
+      // 단순 텍스트이거나, JS Object 일 수 있음. 
+
+      // 만약 resp.text() 사용했다면 문자열(JSON이 그대로 노출)
+      // -> JSON.parse() 이용하여 JS Object 타입으로 변환 가능.
+
+      // JSON.parse(JSON 데이터) : string -> JS object
+      // - string 형태의 JSON 데이터를 JS Object 타입으로 변환
+      
+      // JSON.stringify(JS Object) : JS Object -> string
+      // - JS Object 타입을 string 형태의 JSON 데이터로 변환
+
+      console.log(todoList);
+
+      // -----------------------------------------
+
+      // 기존에 출력되어 있던 할 일 목록을 모두 비우기
+      tbody.innerHTML = "";
+
+      // tbody에 tr/td 요소를 생성해서 내용 추가
+      for(let todo of todoList) { // 향상된 for문
+
+        // tr 태그 생성
+        const tr = document.createElement("tr"); // <tr></tr>
+
+        // JS 객체에 존재하는 key 모음 배열 생성
+        const arr = ['todoNo', 'todoTitle', 'complete', 'regDate'];
+
+        for(let key of arr) {
+          const td = document.createElement("td"); // <td></td>
+
+          // 제목인 경우
+          if(key === 'todoTitle') {
+            const a = document.createElement("a"); // a태그 생성
+            a.innerText = todo[key]; // todo["todoTitle"] 
+            a.href = "/ajax/detail?todoNo=" + todo.todoNo;
+            td.append(a);
+            tr.append(td);
+
+            // a태그 클릭 시 페이지 이동 막기(비동기 요청 사용을 위해)
+            a.addEventListener("click", e => {
+              e.preventDefault(); // 기본 이벤트 방지
+
+              // 할 일 상세 조회 비동기 요청 함수 호출
+              selectTodo(e.target.href);
+            });
+
+            continue;
+          }
+
+          // 제목이 아닌 경우
+          td.innerText = todo[key]; // todo['todoNo'] 
+          tr.append(td); // tr의 마지막요소 현재 td 추가하기
+        }
+
+        // tbody 의 자식으로 tr 추가
+        tbody.append(tr);
+
+      }
+  });
+}
+
+
+
 // 비동기로 할 일 상세 조회하는 함수
 const selectTodo = (url) => {
   // 매개변수 url == "/ajax/detail?todoNo=1"  형태의 문자열
@@ -230,6 +301,57 @@ deleteBtn.addEventListener("click", () => {
   });
 
 });
+
+
+// 완료 여부 변경 버튼 클릭 시
+changeComplete.addEventListener("click", () => {
+
+  // 변경할 할 일 번호, 완료 여부(Y <-> N)
+  const todoNo = popupTodoNo.innerText;
+  const complete = popupComplete.innerText === 'Y' ? 'N' : 'Y';
+
+  // SQL 수행에 필요한 두 값을 JS 객체로 묶음
+  const obj = {"todoNo": todoNo, "complete": complete};
+  //    {"todoNo" : 2 , "complete" : "Y"}
+
+  // 비동기로 완료 여부 변경 요청(PUT 요청 방식)
+  fetch("/ajax/changeComplete", {
+    method : "PUT", // @PutMapping
+    headers: {"Content-Type" : "application/json"},
+    body : JSON.stringify(obj)
+  })
+  .then(resp => resp.text())
+  .then(result => {
+
+    if(result > 0) { // 성공
+
+      // update 된 DB 데이터를 다시 조회해서 화면에 출력
+      // -> 서버 부하가 큼
+
+      //selectTodo();
+      // 상세 조회에서 Y/N 만 바꾸기
+      popupComplete.innerText = complete;
+
+      // getCompleteCount();
+      // 완료된 Todo 개수 +-1
+
+      const count = Number(completeCount.innerText);
+      if(complete === 'Y') completeCount.innerText = count + 1;
+      else                  completeCount.innerText = count - 1;
+
+      selectTodoList();
+      // 서버 부하 줄이기 가능! -> 코드가 복잡해서 오히려 비용증가...
+      // 그냥 서버 요청 함수 호출로 해결
+
+    } else { // 실패
+      alert("완료 여부 변경 실패!!");
+    }
+
+  });
+
+});
+
+
 
 // 상세조회에서 수정 버튼(#updateView) 클릭 시
 updateView.addEventListener("click", () => {
