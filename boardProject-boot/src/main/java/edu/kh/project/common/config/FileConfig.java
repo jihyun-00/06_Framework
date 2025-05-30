@@ -121,10 +121,4 @@ public class FileConfig implements WebMvcConfigurer{
 		return multipartResolver;
 	}
 	
-	
-
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> a33cd5c (좋아요 수까지 완료)

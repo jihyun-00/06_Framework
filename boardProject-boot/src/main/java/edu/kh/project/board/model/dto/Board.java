@@ -45,6 +45,10 @@ public class Board {
 	// 좋아요 여부 확인
 	private int likeCheck;
 	
+	// 관리자 페이지에서 필요해서 추가함
+	// 게시판 종류명
+	private String boardName;
+	
 	
 	
 }

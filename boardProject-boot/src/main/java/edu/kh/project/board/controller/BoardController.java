@@ -257,9 +257,6 @@ public class BoardController {
 		return path;
 	}
 	
-<<<<<<< HEAD
-}
-=======
 	// 비동기 요청이므로 int
 	/** 게시글 좋아요 체크/해제
 	 * @param map
@@ -272,4 +269,3 @@ public class BoardController {
 	}
 	
 }
->>>>>>> a33cd5c (좋아요 수까지 완료)

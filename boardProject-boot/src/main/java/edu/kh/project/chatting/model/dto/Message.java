@@ -14,11 +14,19 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 public class Message {
-	private int messageNo;
-    private String messageContent;
+//	private int messageNo;
+//    private String messageContent;
     private String readFlag;
-    private int senderNo;
+//    private int senderNo;
     private int targetNo;
     private int chattingRoomNo;
+//    private String sendTime;
+    
+    // 단체
+    private int messageNo;
+    private String messageContent;
+    private int senderNo;
+    private String senderNickname;
+    private int studyNo;
     private String sendTime;
 }
