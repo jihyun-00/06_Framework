@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -21,6 +22,7 @@ import edu.kh.project.member.model.dto.Member;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import oracle.jdbc.proxy.annotation.Post;
 
 @RestController // 비동기 컨트롤러
 @CrossOrigin(origins="http://localhost:5173" /*, allowCredentials = "true"*/ )
@@ -209,6 +211,57 @@ public class AdminController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("탈퇴 회원 복구 중 문제 발생 : " + e.getMessage());
 		}
+	}
+	
+	/** 관리자 계정 발급 메서드
+	 * @param member
+	 * @return
+	 */
+	@PostMapping("createAdminAccount")
+	public ResponseEntity<String> createAdminAccount(@RequestBody Member member) {
+		try {
+			
+			// 1. 기존에 있는 이메일인지 검사
+			int checkEmail = service.checkEmail(member.getMemberEmail());
+			
+			// 2. 있으면 발급 안함
+			if(checkEmail > 0) {
+				
+				// HttpStatus.CONFLICT (409) : 요청이 서버의 현재 상태와 충돌할 때 사용
+				// == 이미 존재하는 리소스(email) 때문에 새로운 리소스를 만들 수 없다.
+				return ResponseEntity.status(HttpStatus.CONFLICT)
+						.body("이미 사용 중인 이메일입니다.");
+			}
+			
+			// 3. 없으면 새로 발급
+			String accountPw = service.createAdminAccount(member);
+			
+			// HttpStatus.OK (200) : 요청이 정상적으로 처리되었으나 기존 리소스에 대한 단순 처리
+			// HttpStatus.CREATED (201) : 자원이 성공적으로 생성되었음을 나타냄
+			return ResponseEntity.status(HttpStatus.CREATED).body(accountPw);
+			
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR) // 500
+					.body("관리자 계정 생성 중 문제 발생(서버 문의 바람)");
+		}
+		
+	}
+	
+	@GetMapping("getAdminList")
+	public ResponseEntity<Object> getAdminList() {
+		
+		try {
+			
+			List<Member> adminList = service.getAdminList();
+			
+			return ResponseEntity.status(HttpStatus.CREATED).body(adminList);
+			
+			
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("관리자 계정 조회 중 문제 발생");
+		}
+		
 	}
 
 }

@@ -92,5 +92,34 @@
 	AND BOARD_DEL_FL = 'Y'
 	</update>
 	
+	<!-- 관리자 이메일 중복 검사 -->
+	<select id="checkEmail">
+		SELECT COUNT(*) FROM "MEMBER"
+		WHERE MEMBER_EMAIL = #{memberEmail}
+		AND AUTHORITY = 2
+	</select>
+	
+	<insert id="createAdminAccount">
+	INSERT INTO "MEMBER" VALUES(
+	SEQ_MEMBER_NO.NEXTVAL,
+	#{memberEmail},
+	#{memberPw},
+	#{memberNickname},
+	#{memberTel},
+	NULL,
+	NULL,
+	DEFAULT,
+	DEFAULT,
+	2
+	)
+	</insert>
+	
+	<!-- 관리자 계정 목록 조회 -->
+	<select id="getAdminList">
+	SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_NICKNAME, MEMBER_TEL
+	FROM "MEMBER"
+	WHERE AUTHORITY = 2
+	ORDER BY MEMBER_NO
+	</select>
 	
 </mapper>

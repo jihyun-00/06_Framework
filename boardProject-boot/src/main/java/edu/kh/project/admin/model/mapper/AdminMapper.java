@@ -38,4 +38,13 @@ public interface AdminMapper {
 	// 삭제된 게시글 복구
 	int restoreBoard(int boardNo);
 
+	// 관리자 이메일 중복 검사
+	int checkEmail(String memberEmail);
+
+	// 관리자 계정 발급
+	int createAdminAccount(Member member);
+
+	// 관리자 계정 목록 조회
+	List<Member> getAdminList();
+
 }
