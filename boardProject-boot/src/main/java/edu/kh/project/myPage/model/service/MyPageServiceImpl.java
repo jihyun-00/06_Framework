@@ -189,8 +189,7 @@ public class MyPageServiceImpl implements MyPageService{
 		// 4. 삽입 성공 시 파일을 지정된 서버 폴더에 저장
 		if(result == 0) return 0;
 		
-		// folderPath 경로(C:/uploadFiles/test/변경된파일명) 으로
-		// 파일을 서버 컴퓨터로 저장!
+		// folderPath 경로(C:/uploadFiles/test/변경된파일명) 으로 파일을 서버 컴퓨터로 저장!
 		uploadFile.transferTo(new File(folderPath+fileRename));
 		
 		return result;
