@@ -175,7 +175,7 @@ public class MyPageServiceImpl implements MyPageService{
 		// Builder 패턴을 이용해서 uploadFile 객체 생성
 		// 장점 1)
 
-		// 2. Builder 패턴을 이용해서 Upload 객체 생성
+		// 2. Builder 패턴을 이용해서 Upload 객체 생성 
 		UploadFile uf = UploadFile.builder()
 						.memberNo(memberNo)
 						.filePath(webPath)
