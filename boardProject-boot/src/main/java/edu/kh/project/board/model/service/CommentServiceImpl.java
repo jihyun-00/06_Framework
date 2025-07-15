@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.kh.project.board.model.dto.Comment;
 import edu.kh.project.board.model.mapper.CommentMapper;
 import lombok.extern.slf4j.Slf4j;
-import oracle.jdbc.clio.annotations.Debug;
 
 @Service
 @Transactional(rollbackFor = Exception.class)

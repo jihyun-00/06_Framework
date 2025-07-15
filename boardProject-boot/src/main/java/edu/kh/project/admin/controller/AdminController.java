@@ -22,7 +22,6 @@ import edu.kh.project.member.model.dto.Member;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import oracle.jdbc.proxy.annotation.Post;
 
 @RestController // 비동기 컨트롤러
 @CrossOrigin(origins="http://localhost:5173" /*, allowCredentials = "true"*/ )
