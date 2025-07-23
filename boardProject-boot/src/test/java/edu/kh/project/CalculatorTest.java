@@ -94,7 +94,7 @@ public class CalculatorTest {
 		Exception exception = assertThrows(IllegalArgumentException.class,
 				()->{
 					calculator.divide(10, 0);
-					// 0이 아닌 값을 넣으면 실패가 뜸-> 예외가 발생하지 않았기 때문에
+					// 0이 아닌 값을 넣으면 실패가 뜸-> 예외가 발생하지 않았기 때문에 
 				});
 		
 		// 예외 메시지 비교
