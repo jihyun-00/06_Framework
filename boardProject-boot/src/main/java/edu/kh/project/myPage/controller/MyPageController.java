@@ -131,7 +131,7 @@ public class MyPageController {
 			
 			message = "회원 정보 수정 성공!!";
 		} else {
-			message = "회원 정보 수정 실패..";
+			message = "회원 정보 수정 실패..!";
 		}
 		
 		ra.addFlashAttribute("message", message);
