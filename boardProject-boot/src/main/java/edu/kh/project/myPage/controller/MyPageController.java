@@ -55,8 +55,7 @@ public class MyPageController {
 		// 주소가 있을 경우에만 동작
 		if(memberAddress != null) {
 			
-			// 구분자 "^^^"를 기준으로
-			// memberAddress 값을 쪼개어 String[]로 반환
+			// 구분자 "^^^"를 기준으로 memberAddress 값을 쪼개어 String[]로 반환
 			String[] arr = memberAddress.split("\\^\\^\\^");
 			// -> "04540^^^서울 중구 남대문로 120^^^3층"
 			// -> ["04540", "서울 중구 남대문로 120", "3층"]
