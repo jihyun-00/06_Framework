@@ -265,7 +265,7 @@ public class MyPageController {
 		// 로그인한 회원의 번호 얻어오기(누가 업로드 했는가)
 		int memberNo = loginMember.getMemberNo();
 		
-		// 업로드된 파일 정보를 DB에 INSERT 후 결과 행의 개수 반환받기
+		// 업로드된 파일 정보를 DB에 INSERT 후 결과 행의 개수 반환 받기
 		int result = service.fileUpload2(uploadFile, memberNo);
 		
 		String message = null;
