@@ -143,7 +143,7 @@ public class MyPageController {
 	/** 비밀번호 변경
 	 * @param paramMap : 모든 파라미터(요청 데이터)를 맵으로 저장
 	 * @param loginMember : 세션에 등록된 현재 로그인한 회원 정보
-	 * @param ra 
+	 * @param ra
 	 * @return
 	 */
 	@PostMapping("changePw") // /myPage/changePw POST 요청 매핑
