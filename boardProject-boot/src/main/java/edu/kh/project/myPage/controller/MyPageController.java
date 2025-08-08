@@ -122,7 +122,7 @@ public class MyPageController {
 			// 저장된 객체를 참조하고 있다!
 			
 			// -> loginMember를 수정하면
-			// 	  세션에 저장된 로그인한 회원 정보가 수정된다.
+			// 	  세션에 저장된 로그인한 회원 정보 수정
 			// == 세션 데이터와 DB 데이터를 동기화
 			
 			loginMember.setMemberNickname(inputMember.getMemberNickname());
@@ -136,7 +136,7 @@ public class MyPageController {
 		
 		ra.addFlashAttribute("message", message);
 		
-		return "redirect:info";
+		return "redirect:info"; 
 		
 	}
 	
